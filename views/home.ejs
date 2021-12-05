@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/home">SkyLine</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/userFlight">My Bookings <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link"  href="/logout">Logout</a>
+          </li>
+          
+         
+          
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" name="search1" placeholder="Search" aria-label="Search">
+          <input class="form-control mr-sm-2" type="search" name="search2" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+   
+ 
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">SrNo</th>
+        <th scope="col">FlightID</th>
+        <th scope="col">Source</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Date</th>
+        <th scope="col"> Time</th>
+        <th scope="col"> Duration</th>
+        <th scope="col"> Price</th>
+        <th scope="col">Seats available</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <% if(add==1){%>
+         <% var index=1;%>
+        <%  flight.forEach(function(flight){   %>
+          <form action="/booking/<%=flight._id%>" method="get">
+
+          
+          <div id="<%-flight.flightID%>">
+
+          
+          <tr>
+            <th scope="row"><%=index%> </th>
+          <td><%= flight.flightID%> </td>
+            <td><%= flight.source %></td>
+            <td><%= flight.destination %></td>
+            <td><%= flight.date %></td>
+            <td><%= flight.time %></td>
+            <td><%= flight.duration %></td>
+            <td><%= flight.price %></td>
+            <td><%= flight.remainingSeats %>/<%= flight.seats %></td>
+            
+           <% var i =0;%>
+            <td><button class="btn btn-primary">Book</button></td>
+           <% add=0 %>
+           <% index++ %>
+          </tr>
+        </div>
+      </form>
+            <%})%>
+      <%}%>
+    </tbody>
+  </table>
+  <% if(noMatches !== null){%>
+    <div style="margin: auto;"class="card w-75">
+      <div class="card-body">
+        <h4 style="text-align: center;"class="card-title"><%= noMatches%></h5>
+        <p style="text-align: center;" class="card-text">Look for something else</p>
+        <!-- <a href="/home" class="btn btn-primary">Button</a> -->
+        <form style="margin-left: 10%" class="form-inline my-2 my-lg-0" action="/home" method="GET">
+          <input class="form-control mr-sm-2" style="margin-left: 30%;" type="text" placeholder="Search" name="search" aria-label="Search" required="required"
+          oninvalid="this.setCustomValidity('Enter some text')"
+          oninput="this.setCustomValidity('')">
+          <input class="btn btn-default" type="submit"  value="search" >
+          <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+        </form>
+      </div>
+    </div>
+    
+    
+  <%}%>
+  <!-- <div >
+    <!-- Trigger/Open The Modal -->
+    
+    
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+    
+      <!-- Modal content -->
+      <div class="modal-content">
+
+        <form action="/booking"  method="post">
+            <div class="form-group purple-border">
+                <span class="close">&times;</span>
+                
+                  <label for="cars">Choose a Seat Type:</label>
+                  <select name="cars" id="cars">
+                    <option value="Window">window</option>
+                    <option value="">middle</option>
+                    <option value="AutoCad">isle</option>
+                  </select>
+                  <br><br>
+            
+                
+                
+                <div class="container">
+                    <div class="row mb-8 justify-content-center ">
+                  <div class="col-md-6 col-12">
+                     <div class="mb-4 border-bottom pb-2">
+                        <h4 class="mb-0">No of Seats</h4>
+                     </div>
+                  <div class="row">
+                  <div class="col-12">
+                     <div class="d-flex justify-content-between">
+                        <div>
+                           <p class="text-dark">Window</p>
+                        </div>
+                        <div class="input-group w-auto justify-content-end align-items-center">
+                           
+                           <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field border-0 text-center w-25">
+                          
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-12">
+                     <div class="d-flex justify-content-between">
+                        <div>
+                           <p class="text-dark">Middle</p>
+                        </div>
+                        <div class="input-group w-auto justify-content-end align-items-center">
+                           
+                           <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field border-0 text-center w-25">
+                          
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-12">
+                     <div class="d-flex justify-content-between">
+                        <div>
+                           <p class="text-dark">Isle</p>
+                        </div>
+                        <div class="input-group w-auto justify-content-end align-items-center">
+                           
+                           <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field border-0 text-center w-25">
+                           
+                        </div>
+                     </div>
+                  </div>
+                  </div>
+                      </div>
+                    </div>
+               
+                <button id="1" class=" btn btn-primary " onclick="submitc(this);" type="submit" >Submit</button>
+            </div>
+            </div>
+        </form>
+      </div>
+    
+    </div>
+    <script>
+     
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        
+        // Get the button that opens the modal
+        // var btn = document.getElementById("i");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+         function submitb(e) {
+           var m=e.dataset.postid;
+          
+          modal.style.display = "block";
+        }
+        function submitc(id){
+          
+          
+        }
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        function incrementValue(e) {
+        e.preventDefault();
+        var fieldName = $(e.target).data('field');
+        var parent = $(e.target).closest('div');
+        var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+        if (!isNaN(currentVal)) {
+            parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+        } else {
+            parent.find('input[name=' + fieldName + ']').val(0);
+        }
+    }
+
+    function decrementValue(e) {
+        e.preventDefault();
+        var fieldName = $(e.target).data('field');
+        var parent = $(e.target).closest('div');
+        var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+        if (!isNaN(currentVal) && currentVal > 0) {
+            parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+        } else {
+            parent.find('input[name=' + fieldName + ']').val(0);
+        }
+    }
+
+    $('.input-group').on('click', '.button-plus', function(e) {
+        incrementValue(e);
+    });
+
+    $('.input-group').on('click', '.button-minus', function(e) {
+        decrementValue(e);
+    });function incrementValue(e) {
+        e.preventDefault();
+        var fieldName = $(e.target).data('field');
+        var parent = $(e.target).closest('div');
+        var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+        if (!isNaN(currentVal)) {
+            parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+        } else {
+            parent.find('input[name=' + fieldName + ']').val(0);
+        }
+    }
+
+    function decrementValue(e) {
+        e.preventDefault();
+        var fieldName = $(e.target).data('field');
+        var parent = $(e.target).closest('div');
+        var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+        if (!isNaN(currentVal) && currentVal > 0) {
+            parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+        } else {
+            parent.find('input[name=' + fieldName + ']').val(0);
+        }
+    }
+
+    $('.input-group').on('click', '.button-plus', function(e) {
+        incrementValue(e);
+    });
+
+    $('.input-group').on('click', '.button-minus', function(e) {
+        decrementValue(e);
+    });
+        </script>
+  
+  </div> 
+</body>
+</html>

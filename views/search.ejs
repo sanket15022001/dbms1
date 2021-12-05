@@ -1,0 +1,20 @@
+<%- include("header")-%>
+<tbody>
+
+    <% var index=2;%>
+    <%  flight.forEach(function(flight){   %>
+        <tr>
+            <th scope="row"><%=index%> </th>
+            <td><%= flight.flightID%> </td>
+            <td><%= flight.source %></td>
+            <td><%= flight.destination %></td>
+            <td><%= flight.time %></td>
+            <td><%= flight.price %></td>
+            <td><button id="myBtn">Book</button></td>
+            <% add=0 %>
+            <% index++ %>
+        </tr>
+        <%})%>
+    </tbody>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>RegistrationForm_v10 by Colorlib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- LINEARICONS -->
+		<link rel="stylesheet" href="/img/linearicons/icons.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="/register.css">
+	</head>
+
+	<body>
+
+		<div class="wrapper">
+			<div class="inner">
+				<img src="img/image-1.png" alt="" class="image-1">
+				<form onsubmit="return register(this)" action="/register" method="post">
+					<h3>New Account?</h3>
+					
+					
+						<% 	if(message!==''){  %>
+							<div class="alert alert-warning" style="text-align: center;" role="alert">
+							   <%= message %>
+							</div>
+							<% 	}   %>
+					
+					<div class="form-holder">
+						<span class="lnr lnr-user"></span>
+						<input name="regname" type="text"value="<%=name%>" class="form-control" placeholder="Name">
+					</div>
+					
+					<div class="form-holder">
+						<span class="lnr lnr-envelope"></span>
+						<input name="username" type="email" value="<%=email%>" class="form-control" placeholder="Mail">
+					</div>
+					<div class="form-holder">
+						<span class="lnr lnr-lock"></span>
+						<input id="pass1" name="password" value="<%=password%>" type="password" class="form-control" placeholder="Password">
+						<i class="bi bi-eye-slash" id="togglePassword"></i>
+					</div>
+					<div class="form-holder">
+						<span class="lnr lnr-lock"></span>
+						<input id="pass2"  type="password" name="cpassword" class="form-control" placeholder="Confirm Password">
+						
+					</div>
+					<button type="submit" value="submit">
+						<span>Register</span>
+					</button>
+				</form>
+				<img src="img/image-2.png" alt="" class="image-2">
+			</div>
+			
+		</div>
+		<script>
+     function register(form)
+     {
+       var pass1=form.pass1.value;
+       var pass2 =form.pass2.value;
+       if(pass1 == pass2)
+       {
+         return true;
+      }
+      else{
+		 alert("Password Not Matching")
+		
+         
+		return false;
+      }
+     }
+    </script>
+	<script>
+		 const togglePassword = document.querySelector('#togglePassword');
+         const password = document.querySelector('#myInput');
+         togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye / eye slash icon
+    this.classList.toggle('bi-eye');
+});
+	</script>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/main.js"></script>
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
